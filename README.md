@@ -14,6 +14,10 @@ Outras ferramentas:
 - Baixar Git Bash (https://gitforwindows.org/)
 - Gerar chaves ssh
 
+Observações:
+ - Rodar em tela Full HD
+ - Usar resolução 1600x900 em modo janela do jogo
+
 Crie um arquivo chamado EnvVariables.py na raiz do projeto com 4 variáveis de ambiente:
 
 ```python
