@@ -14,7 +14,7 @@ Outras ferramentas:
 - Baixar Git Bash (https://gitforwindows.org/)
 - Gerar chaves ssh
 
-Crie um arquivo chamado EnvVariables.py na raiz do projeto com 2 variáveis de ambiente:
+Crie um arquivo chamado EnvVariables.py na raiz do projeto com 4 variáveis de ambiente:
 
 ```python
 tesseractCmd = r'D:\<path-to-tesseract>\tesseract.exe'
