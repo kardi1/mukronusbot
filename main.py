@@ -6,13 +6,10 @@ from Telegram import Telegram
 from Events import Events
 from QualityControl import QualityControl
 
-#import pyautogui
-#print(pyautogui.position())
-
-nResets = input("Quantos resets você gostaria de dar? [padrão é 250] ")
+nResets = input("Quantos resets você gostaria de dar? [padrão é 950] ")
 time.sleep(3)
 if (not nResets):
-    nResets = 250
+    nResets = 950
 
 gameActions = GameActions()
 maps = Maps()
@@ -25,7 +22,6 @@ startDay = int(date.today().strftime("%d"))
 reportString = "/////////////////////////////////////////////////\n"
 i = events.getResetsDoDia()
 currentNReset = i
-loops = 0
 while i <= int(nResets):
     # reseta o dia para saber a quantidade de resets diário
     currentDay = int(date.today().strftime("%d"))
@@ -35,15 +31,12 @@ while i <= int(nResets):
     startTime = time.time()
     events.escreverLog('####################')
     events.escreverLog(str(i) + ' resets')
-    gameActions.resetar(i, loops)
-    loops += 1
+    gameActions.resetar(i)
     maps.lorencia()
-    maps.stadium()
+    report = qualityControl.resetStepTwo()
     if (i % 3 == 0):
+        events.rodarComando('/move davias')
         gameActions.reparar()
-    maps.icarus1()
-    report = maps.icarus()
-    #report = maps.kalima()
     checkReset = qualityControl.checkReset(report, i, startTime, reportString, nResets)
     reportString = checkReset[0]  
     currentNReset = i  

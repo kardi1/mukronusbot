@@ -29,9 +29,15 @@ class QualityControl:
         self.events.clicarTecla('1')
         pyautogui.screenshot().save(EnvVariables.screenshotSavingPath + str(i) + 'controle.png')
 
-                
+    def resetStepTwo (self):
+        #report = self.maps.icarus()
+        self.maps.stadium(100)
+        self.events.rodarComando('/v 32000')
+        report = self.maps.kalima()
+        return report
+
     def iniciandoBot (self):
-        self.events.rodarComando('/re on')
+        self.events.rodarComando('/re off')
         self.events.rodarComando('/party on')
         self.events.clicarTecla('c')
         level = self.gameActions.getLevel()
@@ -39,24 +45,22 @@ class QualityControl:
         if (level.isdigit()):
             if (int(level) < self.gameActions.resetLevel):
                 if (int(level) >= 32):
-                    self.maps.stadium()
-                    self.maps.icarus()
+                    return self.resetStepTwo()
 
     def checkReset (self, report, i, startTime, reportString, nResets):
         currentReset = i
-        if (report[0].isdigit()):
+        if (report[0] and report[0].isdigit()):
             if (int(report[0]) < self.gameActions.resetLevel):
                 if (int(report[0]) >= 32):
                     pyautogui.screenshot().save(EnvVariables.screenshotSavingPath + str(currentReset) + '-1.png')
                     reportString += "reset " + str(currentReset) + " não deu boa!"
                     reportString += " lv: " + str(report[0]) + "\n"
-                    self.maps.stadium()
-                    report = self.maps.icarus()
+                    report = self.resetStepTwo()
             if (int(report[0]) >= self.gameActions.resetLevel):
                 i += 1
                 self.events.setResetsDoDia(i)
         else:
-            if ((not report[0]) and (int(report[1]) == 41)):
+            if ((not report[0]) and (int(report[1]) == 51)):
                 if (self.gameActions.getCoordX() and self.gameActions.getCoordY()):
                     pyautogui.screenshot().save(EnvVariables.screenshotSavingPath + str(currentReset) + '-2.png')
                     reportString += "Algo deu errado, tentando consertar..." + "\n"
@@ -68,7 +72,7 @@ class QualityControl:
         resetTime = time.strftime("%Mm %Ss", time.gmtime(endTime - startTime))
         reportString += "r: " + str(currentReset) + ", time: " + resetTime
         reportString += ", lv: " + str(report[0]) + ", t: " + str(report[1]) + "\n"
-        if (i % 10 == 0):
+        if (i % 20 == 0):
             if (self.telegram.sendMessage(reportString)):
                 reportString = ''
         self.events.escreverLog('time: ' + resetTime)
