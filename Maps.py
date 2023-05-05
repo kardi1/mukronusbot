@@ -26,7 +26,10 @@ class Maps:
                     self.esqueleto()
                     return
                 if (int(coordX) == 153 and int(coordY) == 118):
-                    self.aranhas()
+                    #self.aranhas()
+                    self.gameActions.mover(700, 465, 2.5)
+                    self.gameActions.mover(1120, 670, 3)
+                    self.esqueleto()
                     return
             else:
                 # vai para o ponto inicial de lorencia
