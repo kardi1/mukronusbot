@@ -6,10 +6,10 @@ from Telegram import Telegram
 from Events import Events
 from QualityControl import QualityControl
 
-nResets = input("Quantos resets você gostaria de dar? [padrão é 950] ")
+nResets = input("Quantos resets você gostaria de dar? [padrão é 999] ")
 time.sleep(3)
 if (not nResets):
-    nResets = 950
+    nResets = 999
 
 gameActions = GameActions()
 maps = Maps()
@@ -17,12 +17,15 @@ telegram = Telegram()
 events = Events()
 qualityControl = QualityControl()
 
-qualityControl.iniciandoBot()
+#qualityControl.iniciandoBot()
 startDay = int(date.today().strftime("%d"))
 reportString = "/////////////////////////////////////////////////\n"
 i = events.getResetsDoDia()
 currentNReset = i
 while i <= int(nResets):
+    if (not qualityControl.isMadrugada()):
+        i = int(nResets) + 1
+        continue
     # reseta o dia para saber a quantidade de resets diário
     currentDay = int(date.today().strftime("%d"))
     if (startDay != currentDay):

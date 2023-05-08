@@ -5,6 +5,7 @@ from GameActions import GameActions
 from Maps import Maps
 from Telegram import Telegram
 import EnvVariables
+from datetime import datetime
 
 class QualityControl:
     def __init__(self) -> None:
@@ -32,9 +33,27 @@ class QualityControl:
     def resetStepTwo (self):
         #report = self.maps.icarus()
         self.maps.stadium(100)
-        self.events.rodarComando('/v 32000')
+        self.events.rodarComando('/v 700')
         report = self.maps.kalima()
         return report
+    
+    def isMadrugada (self):
+        esperando = False
+        #esperando = True
+        while (esperando):
+            currentHour = int(datetime.now().hour)
+            if (currentHour < 2 or currentHour > 10):
+                time.sleep(2)
+                print('Esperando a hora de jogar...')
+                self.events.clicarTecla('c')
+                time.sleep(1)
+                self.events.clicarTecla('c')
+                time.sleep(300)
+            else:
+                esperando = False
+                if (currentHour > 7):
+                    return False
+        return True
 
     def iniciandoBot (self):
         self.events.rodarComando('/re off')
@@ -72,7 +91,7 @@ class QualityControl:
         resetTime = time.strftime("%Mm %Ss", time.gmtime(endTime - startTime))
         reportString += "r: " + str(currentReset) + ", time: " + resetTime
         reportString += ", lv: " + str(report[0]) + ", t: " + str(report[1]) + "\n"
-        if (i % 20 == 0):
+        if (i % 10 == 0):
             if (self.telegram.sendMessage(reportString)):
                 reportString = ''
         self.events.escreverLog('time: ' + resetTime)
