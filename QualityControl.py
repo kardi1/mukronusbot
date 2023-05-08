@@ -37,12 +37,10 @@ class QualityControl:
         report = self.maps.kalima()
         return report
     
-    def isMadrugada (self):
-        esperando = False
-        #esperando = True
+    def isMadrugada (self, esperando = True):
         while (esperando):
             currentHour = int(datetime.now().hour)
-            if (currentHour < 2 or currentHour > 10):
+            if (currentHour < 1 or currentHour > 10):
                 time.sleep(2)
                 print('Esperando a hora de jogar...')
                 self.events.clicarTecla('c')

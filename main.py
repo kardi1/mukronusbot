@@ -7,9 +7,16 @@ from Events import Events
 from QualityControl import QualityControl
 
 nResets = input("Quantos resets você gostaria de dar? [padrão é 999] ")
+esperar = input("Deseja esperar até a madrugada? y/N  [padrão é N] ")
 time.sleep(3)
 if (not nResets):
     nResets = 999
+
+if (not esperar):
+    esperar = False
+else:
+    if (str(esperar) == 'y'):
+        esperar = True
 
 gameActions = GameActions()
 maps = Maps()
@@ -23,7 +30,7 @@ reportString = "/////////////////////////////////////////////////\n"
 i = events.getResetsDoDia()
 currentNReset = i
 while i <= int(nResets):
-    if (not qualityControl.isMadrugada()):
+    if (not qualityControl.isMadrugada(esperar)):
         i = int(nResets) + 1
         continue
     # reseta o dia para saber a quantidade de resets diário
