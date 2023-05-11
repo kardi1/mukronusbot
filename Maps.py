@@ -1,6 +1,7 @@
 import time
 from Events import Events
 from GameActions import GameActions
+from datetime import datetime
 
 class Maps:
     levelFirstSpot = 32
@@ -17,19 +18,20 @@ class Maps:
             coordX = self.gameActions.getCoordX()
             coordY = self.gameActions.getCoordY()
             if (coordX.isdigit() and coordY.isdigit()):
+                currentHour = int(datetime.now().hour)
                 if (int(coordX) == 149 and int(coordY) == 108):
-                    #currentTime = time.time()
-                    #if (int(currentTime) % 2 == 0):
-                    #    self.esqueleto()
-                    #else:
-                    #    self.bufalos()
-                    self.esqueleto()
+                    if (currentHour > 2 and currentHour < 8):
+                        self.bufalos()
+                    else:
+                        self.esqueleto()
                     return
                 if (int(coordX) == 153 and int(coordY) == 118):
-                    #self.aranhas()
-                    self.gameActions.mover(700, 465, 2.5)
-                    self.gameActions.mover(1120, 670, 3)
-                    self.esqueleto()
+                    if (currentHour > 2 and currentHour < 8):
+                        self.aranhas()
+                    else:
+                        self.gameActions.mover(700, 465, 2.5)
+                        self.gameActions.mover(1120, 670, 3)
+                        self.esqueleto()
                     return
             else:
                 # vai para o ponto inicial de lorencia
