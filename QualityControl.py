@@ -37,13 +37,12 @@ class QualityControl:
         self.events.rodarComando(frase)
 
     def resetStepTwo (self):
-        self.geradorDeFrase()
-        self.maps.stadium(170)
-        self.geradorDeFrase()
-        self.events.rodarComando('/v 30000')
-        report = self.maps.kalima()
-        #report = self.maps.icarus()
-        self.geradorDeFrase()
+        #self.geradorDeFrase()
+        self.maps.stadium(200)
+        #self.geradorDeFrase()
+        #report = self.maps.kalima()
+        report = self.maps.icarus()
+        #self.geradorDeFrase()
         return report
     
     def isMadrugada (self, esperando = True):
@@ -65,6 +64,7 @@ class QualityControl:
     def iniciandoBot (self):
         self.events.rodarComando('/re off')
         self.events.rodarComando('/party on')
+        return
         self.events.clicarTecla('c')
         level = self.gameActions.getLevel()
         self.events.clicarTecla('c')
@@ -75,14 +75,14 @@ class QualityControl:
 
     def checkReset (self, report, i, startTime, reportString, nResets):
         currentReset = i
-        if (str(report[0]) != '' and report[0].isdigit()):
+        if (report[0] and report[0].isdigit()):
             if (int(report[0]) < self.gameActions.resetLevel):
                 if (int(report[0]) >= 32):
                     pyautogui.screenshot().save(EnvVariables.screenshotSavingPath + str(currentReset) + '-1.png')
                     reportString += "reset " + str(currentReset) + " não deu boa!"
                     reportString += " lv: " + str(report[0]) + "\n"
                     report = self.resetStepTwo()
-            if (int(report[0]) >= self.gameActions.resetLevel):
+            if (report[0] and report[0].isdigit() and int(report[0]) >= self.gameActions.resetLevel):
                 i += 1
                 self.events.setResetsDoDia(i)
         else:

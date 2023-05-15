@@ -24,7 +24,7 @@ telegram = Telegram()
 events = Events()
 qualityControl = QualityControl()
 
-#qualityControl.iniciandoBot()
+qualityControl.iniciandoBot()
 startDay = int(date.today().strftime("%d"))
 reportString = "/////////////////////////////////////////////////\n"
 i = events.getResetsDoDia()
@@ -44,7 +44,7 @@ while i <= int(nResets):
     gameActions.resetar(i)
     maps.lorencia()
     report = qualityControl.resetStepTwo()
-    if (i % 3 == 0):
+    if (i % 2 == 0):
         events.rodarComando('/move davias')
         gameActions.reparar()
     checkReset = qualityControl.checkReset(report, i, startTime, reportString, nResets)

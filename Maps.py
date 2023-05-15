@@ -18,20 +18,20 @@ class Maps:
             coordX = self.gameActions.getCoordX()
             coordY = self.gameActions.getCoordY()
             if (coordX.isdigit() and coordY.isdigit()):
-                currentHour = int(datetime.now().hour)
+                #currentHour = int(datetime.now().hour)
                 if (int(coordX) == 149 and int(coordY) == 108):
-                    if (currentHour > 2 and currentHour < 8):
-                        self.bufalos()
-                    else:
-                        self.esqueleto()
+                    #if (currentHour > 2 and currentHour < 8):
+                    #    self.bufalos()
+                    #else:
+                    self.esqueleto()
                     return
                 if (int(coordX) == 153 and int(coordY) == 118):
-                    if (currentHour > 2 and currentHour < 8):
-                        self.aranhas()
-                    else:
-                        self.gameActions.mover(700, 465, 2.5)
-                        self.gameActions.mover(1120, 670, 3)
-                        self.esqueleto()
+                    #if (currentHour > 2 and currentHour < 8):
+                    #    self.aranhas()
+                    #else:
+                    self.gameActions.mover(700, 465, 2.5)
+                    self.gameActions.mover(1120, 670, 3)
+                    self.esqueleto()
                     return
             else:
                 # vai para o ponto inicial de lorencia

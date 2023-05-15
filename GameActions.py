@@ -3,7 +3,7 @@ import time
 from Events import Events
 
 class GameActions:
-    resetLevel = 310
+    resetLevel = 350
     def __init__(self) -> None:
         self.events = Events()
 
@@ -38,6 +38,24 @@ class GameActions:
     
     def getCoordY(self):
         return self.events.readScreen(255,950,305,975)
+    
+    def colocarDesfarce (self):
+        time.sleep(1)
+        self.events.clicarTecla('v')
+        pyautogui.moveTo(1705,750)
+        self.events.clicarMouse()
+        pyautogui.moveTo(1450,390)
+        self.events.clicarMouse()
+        self.events.clicarTecla('v')
+
+    def tirarDesfarce (self):
+        time.sleep(1)
+        self.events.clicarTecla('v')
+        pyautogui.moveTo(1450,390)
+        self.events.clicarMouse()
+        pyautogui.moveTo(1705,750)
+        self.events.clicarMouse()
+        self.events.clicarTecla('v')
 
     def bater (self, levelGoal):
         startTime = time.time()
@@ -74,6 +92,8 @@ class GameActions:
         return [levelText, y]
 
     def resetar (self, i):
+        self.events.rodarComando('/move davias')
+        self.colocarDesfarce()
         self.events.rodarComando('/resetar')
         time.sleep(2)
         coordX = self.getCoordX()
@@ -82,19 +102,20 @@ class GameActions:
         self.events.escreverLog('coord: ' + coordText)
         if (coordX.isdigit() and coordY.isdigit()):
             if (int(coordX) <= 136 and int(coordY) <= 123):
-                self.mover(1235, 495, 1)
+                self.mover(1235, 495, 2)
             if (int(coordX) >= 144 and int(coordY) >= 128):
-                self.mover(510, 435, 1)
+                self.mover(510, 435, 2)
         pyautogui.moveTo(950, 650)
+        #pyautogui.moveTo(990, 175)
         pyautogui.mouseDown()
-        points = i * 100
-        if (points > 32700):
-            points = 32700
+        #points = i * 100
+        #if (points > 32700):
+        #    points = 32700
         self.events.rodarComando('/zen')
-        self.events.rodarComando('/a ' + str(points))
-        self.events.rodarComando('/e ' + str(points))
-        #self.events.rodarComando('/e 32737')
-        #self.events.rodarComando('/a 32741')
-        #self.events.rodarComando('/v 32741')
-        #self.events.rodarComando('/f 32741')
+        #self.events.rodarComando('/a ' + str(points))
+        #self.events.rodarComando('/e ' + str(points))
+        self.events.rodarComando('/e 32737')
+        self.events.rodarComando('/a 32741')
+        self.events.rodarComando('/v 32741')
+        self.events.rodarComando('/f 32741')
         pyautogui.mouseUp()
