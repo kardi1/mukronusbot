@@ -2,6 +2,7 @@ import time
 from Events import Events
 from GameActions import GameActions
 from datetime import datetime
+import pyautogui
 
 class Maps:
     levelFirstSpot = 32
@@ -11,6 +12,16 @@ class Maps:
     def __init__(self) -> None:
         self.gameActions = GameActions()
         self.events = Events()
+
+    def lorenciaNew (self):
+        self.gameActions.mover(1435, 485, 4)
+        self.gameActions.mover(950, 160, 6)
+        self.gameActions.mover(600, 240, 6)
+        pyautogui.moveTo(960, 465)
+        time.sleep(2)
+        self.gameActions.mover(1020, 195, 1)
+        self.gameActions.mover(1145, 295, 1)
+        self.gameActions.bater(self.levelFirstSpot)
 
     def lorencia (self):
         layer = 0
@@ -29,22 +40,23 @@ class Maps:
                     #if (currentHour > 2 and currentHour < 8):
                     #    self.aranhas()
                     #else:
-                    self.gameActions.mover(700, 465, 2.5)
-                    self.gameActions.mover(1120, 670, 3)
+                    self.gameActions.mover(700, 465, 3)
+                    self.gameActions.mover(1120, 670, 5)
                     self.esqueleto()
                     return
             else:
                 # vai para o ponto inicial de lorencia
-                self.gameActions.mover(700, 465, 2.5)
-                self.gameActions.mover(1120, 670, 3)
+                self.gameActions.mover(700, 465, 3)
+                self.gameActions.mover(1120, 670, 5)
                 self.esqueleto()
                 return
             self.gameActions.mover(950, 650, 1)
             layer += 1
 
     def esqueleto (self):
-        self.gameActions.mover(1080, 190, 7.8)
-        self.gameActions.mover(1280, 320, 16.5)
+        self.gameActions.mover(1080, 190, 10.5)
+        self.gameActions.tirarDesfarce()
+        self.gameActions.mover(1280, 320, 15)
         # limpa mobs para poder andar
         time.sleep(2)
         self.gameActions.mover(920,230, 1)

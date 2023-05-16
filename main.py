@@ -42,7 +42,7 @@ while i <= int(nResets):
     events.escreverLog('####################')
     events.escreverLog(str(i) + ' resets')
     gameActions.resetar(i)
-    maps.lorencia()
+    maps.lorenciaNew()
     report = qualityControl.resetStepTwo()
     if (i % 2 == 0):
         events.rodarComando('/move davias')

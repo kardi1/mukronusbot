@@ -96,7 +96,9 @@ class QualityControl:
                     i = int(nResets) + 1
         endTime = time.time()
         resetTime = time.strftime("%Mm %Ss", time.gmtime(endTime - startTime))
-        reportString += "r:" + str(currentReset) + ",t:" + resetTime+ "; "
+        reportString += "r: " + str(currentReset) + ", t: " + resetTime+ "; "
+        if (int(currentReset) % 2 == 0):
+            reportString += "\n"
         #reportString += ", lv: " + str(report[0]) + ", t: " + str(report[1]) + "\n"
         if (i % 30 == 0):
             if (self.telegram.sendMessage(reportString)):
