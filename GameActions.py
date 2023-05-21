@@ -68,10 +68,10 @@ class GameActions:
         i = 1
         y = 1
         stuck = 1
-        while i <= 2 and y <= 50 and stuck < 10:
+        while i <= 2 and y <= 100 and stuck < 10:
             if (levelText.isdigit()):
                 if (int(levelText) <= int(self.resetLevel) and int(levelText) < int(levelGoal)):
-                    if (oldLevel == levelText):
+                    if (oldLevel == levelText and int(levelText) >= 32):
                         stuck += 1
                     else:
                         stuck = 1
@@ -113,6 +113,10 @@ class GameActions:
                 segundos = ((coordX - 15) - coordY)/5
                 if (segundos > 0):
                     self.mover(735, 300, segundos)
+        coordX = self.getCoordX()
+        coordY = self.getCoordY()
+        coordText = str(coordX) + ', ' + str(coordY)
+        self.events.escreverLog('init: ' + coordText)
         
     def distribuiPontos (self, i):
         #points = i * 100

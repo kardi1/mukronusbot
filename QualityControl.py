@@ -64,7 +64,6 @@ class QualityControl:
     def iniciandoBot (self):
         self.events.rodarComando('/re off')
         self.events.rodarComando('/party on')
-        return
         self.events.clicarTecla('c')
         level = self.gameActions.getLevel()
         self.events.clicarTecla('c')
