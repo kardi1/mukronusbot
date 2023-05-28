@@ -64,6 +64,7 @@ class QualityControl:
     def iniciandoBot (self):
         self.events.rodarComando('/re off')
         self.events.rodarComando('/party on')
+        self.events.rodarComando('/zen')
         self.events.clicarTecla('c')
         level = self.gameActions.getLevel()
         self.events.clicarTecla('c')
@@ -85,7 +86,7 @@ class QualityControl:
                 i += 1
                 self.events.setResetsDoDia(i)
         else:
-            if ((not report[0]) and (int(report[1]) == 51)):
+            if ((not report[0]) and (int(report[1]) == 101)):
                 if (self.gameActions.getCoordX() and self.gameActions.getCoordY()):
                     pyautogui.screenshot().save(EnvVariables.screenshotSavingPath + str(currentReset) + '-2.png')
                     reportString += "Algo deu errado, tentando consertar..." + "\n"

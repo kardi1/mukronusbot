@@ -15,6 +15,7 @@ class GameActions:
         time.sleep(0.5)
 
     def reparar (self):
+        self.events.rodarComando('/move atlans')
         time.sleep(1)
         self.events.clicarTecla('v')
         pyautogui.moveTo(1470,850)
@@ -118,6 +119,26 @@ class GameActions:
         coordText = str(coordX) + ', ' + str(coordY)
         self.events.escreverLog('init: ' + coordText)
         
+    def goToSetStartArea (self):
+        pyautogui.moveTo(415, 440)
+        pyautogui.mouseDown()
+        layer = 0
+        while (layer <= 5):
+            coordX = self.getCoordX()
+            coordY = self.getCoordY()
+            #print(str(coordX) + ', ' + str(coordY))
+            if (coordX.isdigit() and coordY.isdigit()):
+                if (int(coordX) <= 133 and int(coordY) <= 116):
+                    pyautogui.mouseUp()
+                    coordText = str(coordX) + ', ' + str(coordY)
+                    self.events.escreverLog('cheguei: ' + coordText)
+                    time.sleep(10)
+                    return
+            time.sleep(1)
+            layer += 1
+            print('indo...')
+        pyautogui.mouseUp()
+
     def distribuiPontos (self, i):
         #points = i * 100
         #if (points > 32700):

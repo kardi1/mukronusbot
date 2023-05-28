@@ -45,13 +45,12 @@ while i <= int(nResets):
     maps.lorenciaNew()
     report = qualityControl.resetStepTwo()
     if (i % 2 == 0):
-        events.rodarComando('/move davias')
         gameActions.reparar()
     checkReset = qualityControl.checkReset(report, i, startTime, reportString, nResets)
     reportString = checkReset[0]  
     currentNReset = i  
     i = checkReset[1]
-events.rodarComando('/move davias')
+events.rodarComando('/move atlans')
 reportString += "Bot finalizado!!! Número de resets: " + str(currentNReset) + "\n"
 while (not telegram.sendMessage(reportString)):
     time.sleep(5)
