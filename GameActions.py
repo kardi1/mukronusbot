@@ -93,27 +93,34 @@ class GameActions:
         self.events.clicarTecla('c')
         return [levelText, y]
     
+    def aumentaX (self, t):
+        self.mover(1170, 580, t)
+
+    def diminuiX (self, t):
+        self.mover(735, 300, t)
+
+    def aumentaY (self, t):
+        self.mover(1170, 330, t)
+
+    def diminuiY (self, t):
+        self.mover(720, 610, t)
+    
     def iniciaLorencia (self):
         coordX = self.getCoordX()
         coordY = self.getCoordY()
         coordText = str(coordX) + ', ' + str(coordY)
         self.events.escreverLog('coord: ' + coordText)
-        #if (coordX.isdigit() and coordY.isdigit()):
-        #    if (int(coordX) <= 136 and int(coordY) <= 123):
-        #        self.mover(1235, 495, 2)
-        #    if (int(coordX) >= 144 and int(coordY) >= 128):
-        #        self.mover(510, 435, 2)
         if (coordX.isdigit() and coordY.isdigit()):
             coordX = int(coordX)
             coordY = int(coordY)
             if (coordX <= 142):
                 segundos = (coordY - (coordX - 15))/5
                 if (segundos > 0):
-                    self.mover(720, 610, segundos)
+                    self.diminuiY(segundos)
             else:
                 segundos = ((coordX - 15) - coordY)/5
                 if (segundos > 0):
-                    self.mover(735, 300, segundos)
+                    self.diminuiX(segundos)
         coordX = self.getCoordX()
         coordY = self.getCoordY()
         coordText = str(coordX) + ', ' + str(coordY)
@@ -126,7 +133,6 @@ class GameActions:
         while (layer <= 5):
             coordX = self.getCoordX()
             coordY = self.getCoordY()
-            #print(str(coordX) + ', ' + str(coordY))
             if (coordX.isdigit() and coordY.isdigit()):
                 if (int(coordX) <= 133 and int(coordY) <= 116):
                     pyautogui.mouseUp()
@@ -139,13 +145,8 @@ class GameActions:
             print('indo...')
         pyautogui.mouseUp()
 
-    def distribuiPontos (self, i):
-        #points = i * 100
-        #if (points > 32700):
-        #    points = 32700
+    def distribuiPontos (self):
         self.events.rodarComando('/zen')
-        #self.events.rodarComando('/a ' + str(points))
-        #self.events.rodarComando('/e ' + str(points))
         self.events.rodarComando('/e 32737')
         self.events.rodarComando('/a 32741')
         self.events.rodarComando('/v 32741')
@@ -170,8 +171,7 @@ class GameActions:
         time.sleep(2)
         self.iniciaLorencia()
         pyautogui.moveTo(415, 440)
-        #pyautogui.moveTo(990, 175)
         pyautogui.mouseDown()
-        self.distribuiPontos(i)
+        self.distribuiPontos()
         self.checkPontoInicial()
         pyautogui.mouseUp()
